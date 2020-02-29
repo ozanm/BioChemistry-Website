@@ -1,0 +1,637 @@
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+
+	Answers Map:
+		True/False:
+			F T F F T T T F T F
+		Multiple Choice:
+			C B C A A D A D C B
+-->
+<html>
+	<head>
+		<title>Interactive Quiz - Chemistry of Life</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload" style="overflow-x: hidden;">
+		<style>
+		* {
+			transition: left 1s, right 1s;
+		}
+		</style>
+		<script>
+			let information = {
+				"Questions": {
+					"True/False"     : [
+						" Biology:<br />Macromolecules are simple and small and can just diffuse through a lipid bilayer.",
+						" Chemistry:<br />Titrations are used as the most accurate method of finding the molarity of an acid.",
+						" Biology:<br />Lipids are the sugars, starches and fibers found in fruits, grains, vegetables and milk products.",
+						" Chemistry:<br />An acid can have a negative pH.",
+						" Biology:<br />Enzymes catalyze biological processes within the human body such as digestion.",
+						" Chemistry:<br />A reaction with an acid and a base where they cancel each other out produces a salt and other products.",
+						" Biology:<br />Macromolecules are formed by the combination of monomers.",
+						" Chemistry:<br />Water, during a reaction, stays neutral and doesn’t donate, nor recieve any protons.",
+						" Biology:<br />During ploymerization, monomers release water as the byproduct.",
+						" Chemistry:<br />Bases are terrible conductors of electricity.",
+					],
+					"Multiple Choice": [
+						"Chemistry:<br />Which of the following is not a type of acid?<br /><br />a) Organic acid<br />b) Dilute acid<br />c) Soluble acid<br />d) Hydracid",
+						"Biology:<br /> ______ is not a type of macromolecule.<br /><br />a) Proteins<br />b) Titrations<br />c) Lipids<br />d) Carbohydrates",
+						"Chemistry:<br />Which of the following is not a type of base?<br /><br />a) Concentrated base<br />b) Diacidic base<br />c) Cleaning base<br />d) Weak base acid",
+						"Biology:<br />The membranes of cells and organelles are formed from two layers of ______.<br /><br />a) Phospholipid molecules<br />b) Cell walls<br />c) Proteins<br />d) Fatty acids",
+						"Chemistry:<br />What was Bronsted-Lowry theory also called?<br /><br />a) Proton theory of acids and bases<br />b) Acids and Bases theory<br />c) Lowry-Bronsted theory<br />d) Proton theory",
+						"Biology:<br />Which of the following are proteins present in?<br /><br />a) Tissues<br />b) Nucleus<br />c) Water<br />d) All living organisms",
+						"Chemistry:<br />______ is a type of weak base.<br /><br />a) Dimethylamine<br />b) Barium hydroxide<br />c) Potassium hydroxide<br />d) Magnesium",
+						"Biology:<br />Plants move water into all their cells by ______.<br /><br />a) Anti-gravity machine<br />b) Specific Heat Capacity<br />c) Hydrogen Bonding<br />d) A combination of adhesion and cohesion",
+						"Chemistry:<br />Which acid reaction is an example of Acid + Hydroxide --> Salt + H2O?<br /><br />a) HBr + Na --> NaBr + H2(g)<br />b) 2HCl + CaO --> CaCl2 + H2O<br />c) HCl + NaOH --> NaCl + H2O<br />d) NF + MgCo3 --> MgF2H2O + CO2",
+						"Biology:<br />In water, which compound has the negative charge?<br /><br />a) Hydrogen<br />b) Oxygen<br />c) Carbon<br />d) Calcium",
+					],
+				},
+				"Answers"  : {
+					"True/False"     : [
+						"The term macro itself means \"big\" making this question false.",
+						"Yes they are as all chemists use them!",
+						"It is the carbohydrates that are \"the sugars, starches and fibers found in fruits, grains, vegetables and milk products\" making this question false.",
+						"No it cannot, the range only has values from 0 - 14.",
+						"Enzymes are the acids in the human body that catalyze the chemical reactions making this true.",
+						"Yes they do, the other products depends on what the reactants are.",
+						"It is the process of polymerization where monomers combine into polymers and become macromolecules making this question true.",
+						"This is false because water during a reaction plays the role of either a base or an acid depending on the other chemicals in the reaction.",
+						"This process is called \"dehydration synthesis\" and dehydration means letting go of water making this true.",
+						"This is false because bases contain electrolytes.",
+					],
+					"Multiple Choice": [
+						"The answer is c) because the term \"Soluble acid\" does not appear in Chemistry.",
+						"The answer is b) because titrations are a chemical experiment done to measure the Molarity of an acid.",
+						"The answer is c) because the term \"Cleaning base\" does not appear in Chemistry.",
+						"The answer is a) because membranes also have a phospholipid bilayer.",
+						"The answer is a) \"Proton theory of acids and bases\" because the Bronsted-Lowry theory explains the role protons play in a reaction with acids and bases.",
+						"The answer is d) because the other three options were unrelated.",
+						"The answer is a) because \"Dimethylamine\" is the only substance in that list that has a pH within the range of 3 - 6.",
+						"The answer is d) because the adhesion and cohesion is what gets water to stick to the side of the stem and to each other so that they can pull each other up.",
+						"The answer is c) because the formula \"HCl + NaOH --> NaCl + H2O\" has HCl as the acid, NaOH as the hydroxide, NaCl (sodium chloride) as the salt, and H20 as the water.",
+						"The answer is b) because the oxygen side of the water molecule has more electrolytes.",
+					],
+				},
+			};
+
+			let questions_map = {
+				"True/False"     : ["false", "true", "false", "false", "true", "true", "true", "false", "true", "false"],
+				"Multiple Choice": [  "C",  "B",   "C",   "A",  "A",  "D",  "A",   "D",  "C",   "B"],
+			};
+			let answers_map = {
+				"True/False"     : [false, true, false, false, true, true, true, false, true, false],
+				"Multiple Choice": [  "C",  "B",   "C",   "A",  "A",  "D",  "A",   "D",  "C",   "B"],
+			};
+			let users_answers = {
+				"True/False"     : [null, null, null, null, null, null, null, null, null, null],
+				"Multiple Choice": [null, null, null, null, null, null, null, null, null, null],
+			};
+
+			let selectedRadio = null;
+
+			document.body.onload = function() {
+				for(let i = 1; i <= information["Questions"]["True/False"].length; i++) {
+					document.getElementById("True/False." + i + ".content").innerHTML += information["Questions"]["True/False"][i - 1];
+				}
+
+				for(let i = 11; i <= information["Questions"]["Multiple Choice"].length + 10; i++) {
+					document.getElementById("Multiple Choice." + i + ".content").innerHTML += information["Questions"]["Multiple Choice"][i - 11];
+				}
+
+				for (let i = 1; i <= users_answers["Multiple Choice"].length; i++) {
+					document.getElementById("MC." + (i + 10) + ".A").onclick = function() {
+						selectedRadio = "A";
+						document.getElementById("MC." + (i + 10) + ".SET").classList.remove("disabled");
+					};
+					document.getElementById("MC." + (i + 10) + ".B").onclick = function() {
+						selectedRadio = "B";
+						document.getElementById("MC." + (i + 10) + ".SET").classList.remove("disabled");
+					};
+					document.getElementById("MC." + (i + 10) + ".C").onclick = function() {
+						selectedRadio = "C";
+						document.getElementById("MC." + (i + 10) + ".SET").classList.remove("disabled");
+					};
+					document.getElementById("MC." + (i + 10) + ".D").onclick = function() {
+						selectedRadio = "D";
+						document.getElementById("MC." + (i + 10) + ".SET").classList.remove("disabled");
+					};
+				}
+			}
+
+			function set(section, question, answer) {
+				users_answers[section.substring(0, section.length - 1)][question - (section == "Multiple Choice." ? 11 : 1)] = answer;
+				update(section, question + 1);
+
+				if(answers_full()) {
+					document.getElementById("SubmitAnswers.content").classList.remove("disabled");
+				}
+			}
+
+			function calculate_score() {
+				let scores = {
+					"True/False": sum_score("True/False"),
+					"Multiple Choice": sum_score("Multiple Choice"),
+					"Explanations": compile_explanations(),
+				};
+
+				document.getElementById("main_header").scrollIntoView();
+				document.getElementById("title").innerHTML = "Congrats! You got " + Math.floor(((scores["True/False"] + scores["Multiple Choice"]) / 20) * 100) + "%!";
+				document.getElementById("correct").innerHTML = "Correct: " + (scores["True/False"] + scores["Multiple Choice"]);
+				document.getElementById("wrong").innerHTML = "Wrong: " + (20 - (scores["True/False"] + scores["Multiple Choice"]));
+				alert("You got the following questions wrong and here's why, dismiss this popup to find out your percentage." + scores["Explanations"]);
+			}
+
+			function sum_score(type) {
+				let score = 0;
+				for(let i = 0; i < answers_map[type].length; i++) {
+					score += users_answers[type][i] == answers_map[type][i] ? 1 : 0;
+				}
+				return score;
+			}
+
+			function compile_explanations() {
+				let explanations = extract_explanations("True/False").concat(extract_explanations("Multiple Choice"));
+				let compiled = "\n";
+				for (let i = 0; i < explanations.length; i++) {
+					compiled += explanations[i] + "\n";
+				}
+
+				return compiled;
+			}
+
+			function extract_explanations(type) {
+				let explanations = [];
+
+				for(let i = 0; i < answers_map[type].length; i++) {
+					if (users_answers[type][i] != answers_map[type][i]) {
+						explanations.push(i + ". " + information["Answers"][type][i])
+					}
+				}
+
+				return explanations;
+			}
+
+			function update(view, next) {
+				if (next != 11 && next != 21) {
+					let section = view == "Multiple Choice." ? "1110px" : "415px";
+					document.getElementById(view + (next - 1)).style = "position: absolute; width: 750px; height: 350px; top: " + section + "; left: -800px; transform: translateX(-50%);";
+					document.getElementById(view + (next - 0)).style = "position: absolute; width: 750px; height: 350px; top: " + section + "; left: 50%; transform: translateX(-50%);";
+
+					updatePages(view, next);
+				} else {
+					document.getElementById(next == 11 ? "Multiple Choice" : "SubmitAnswers").scrollIntoView();
+				}
+			}
+
+			function jump_to(view, page) {
+				let section = view == "Multiple Choice." ? "1110px" : "415px";
+				document.getElementById(view + page).style = "position: absolute; width: 750px; height: 350px; top: " + section + "; left: 50%; transform: translateX(-50%);";
+				for (let i = view == "Multiple Choice." ? 11 : 1; i < page; i++) {
+					document.getElementById(view + i).style = "position: absolute; width: 750px; height: 350px; top: " + section + "; left: -800px; transform: translateX(-50%);";
+				}
+				for (let i = page + 1; i <= users_answers[view.substring(0, view.length - 1)].length + (view == "Multiple Choice." ? 10 : 0); i++) {
+					document.getElementById(view + i).style = "position: absolute; width: 750px; height: 350px; top: " + section + "; left: 100%;";
+				}
+
+				updatePages(view, page);
+			}
+
+			function updatePages(section, next) {
+				for (let i = 0; i < users_answers[section.substring(0, section.length - 1)].length; i++) {
+					document.getElementById("manager." + section + (i + (section == "Multiple Choice." ? 10 : 0) + 1)).classList.remove("active");
+				}
+
+				document.getElementById("manager." + section + next).classList.add("active");
+			}
+
+			function answers_full() {
+				return users_answers["True/False"].includes(null) == false && users_answers["Multiple Choice"].includes(null) == false;
+			}
+		</script>
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="../index.html" class="logo"><strong>Ozan</strong> <span>Mirza</span></a>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<ul class="links">
+							<li><a href="../index.html">Home</a></li>
+							<li><a href="properties_of_water.html">Properties of Water</a></li>
+							<li><a href="acidity_in_chemicals.html">Acidity in Chemicals</a></li>
+							<li><a href="macromolecules.html">Macromolecules</a></li>
+							<li><a href="pH_pOH_scale.html">pH/pOH Scale</a></li>
+							<li><a href="titrations.html">Titrations</a></li>
+						</ul>
+						<ul class="actions stacked">
+							<li><a href="interactive_quiz.html" class="button primary fit">Interactive Quiz</a></li>
+							<li><a href="bibliography.html" class="button fit">Bibliography</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main" class="alt">
+
+						<!-- One -->
+							<section id="one">
+								<div class="inner">
+									<header id="main_header" class="major">
+										<h1 id="title">Interactive Quiz</h1>
+										<h3 id="correct" style="position: absolute; top: 125px; left: 80%;"></h3>
+										<h3 id="wrong" style="position: absolute; top: 175px; left: 80%;"></h3>
+									</header>
+									<div id="True/False" class="row box" style="height: 650px;"> <!-- True/False -->
+										<h2 style="padding: 0% 50% 0% 45%;">True/False</h2>
+										<div id="True/False.1" class="box" style="position: absolute; width: 750px; height: 350px; top: 415px; left: 50%; transform: translateX(-50%);">
+											<h4 id="True/False.1.content" style="padding: 25px 25px 0px 25px;">1.</h4>
+											<div class="row" style="padding: 100px 0px 0px 275px;">
+												<ul class="actions">
+													<li><a href="javascript:set('True/False.', 1, true);" class="button primary fit">True</a></li>
+													<li><a href="javascript:set('True/False.', 1, false);" class="button fit">False</a></li>
+												</ul>
+											</div>
+										</div>
+										<div id="True/False.2" class="box" style="position: absolute; width: 750px; height: 350px; top: 415px; left: 100%;">
+											<h4 id="True/False.2.content" style="padding: 25px 25px 0px 25px;">2.</h4>
+											<div class="row" style="padding: 100px 0px 0px 275px;">
+												<ul class="actions">
+													<li><a href="javascript:set('True/False.', 2, true);" class="button primary fit">True</a></li>
+													<li><a href="javascript:set('True/False.', 2, false);" class="button fit">False</a></li>
+												</ul>
+											</div>
+										</div>
+										<div id="True/False.3" class="box" style="position: absolute; width: 750px; height: 350px; top: 415px; left: 100%;">
+											<h4 id="True/False.3.content" style="padding: 25px 25px 0px 25px;">3.</h4>
+											<div class="row" style="padding: 100px 0px 0px 275px;">
+												<ul class="actions">
+													<li><a href="javascript:set('True/False.', 3, true);" class="button primary fit">True</a></li>
+													<li><a href="javascript:set('True/False.', 3, false);" class="button fit">False</a></li>
+												</ul>
+											</div>
+										</div>
+										<div id="True/False.4" class="box" style="position: absolute; width: 750px; height: 350px; top: 415px; left: 100%;">
+											<h4 id="True/False.4.content" style="padding: 25px 25px 0px 25px;">4.</h4>
+											<div class="row" style="padding: 100px 0px 0px 275px;">
+												<ul class="actions">
+													<li><a href="javascript:set('True/False.', 4, true);" class="button primary fit">True</a></li>
+													<li><a href="javascript:set('True/False.', 4, false);" class="button fit">False</a></li>
+												</ul>
+											</div>
+										</div>
+										<div id="True/False.5" class="box" style="position: absolute; width: 750px; height: 350px; top: 415px; left: 100%;">
+											<h4 id="True/False.5.content" style="padding: 25px 25px 0px 25px;">5.</h4>
+											<div class="row" style="padding: 100px 0px 0px 275px;">
+												<ul class="actions">
+													<li><a href="javascript:set('True/False.', 5, true);" class="button primary fit">True</a></li>
+													<li><a href="javascript:set('True/False.', 5, false);" class="button fit">False</a></li>
+												</ul>
+											</div>
+										</div>
+										<div id="True/False.6" class="box" style="position: absolute; width: 750px; height: 350px; top: 415px; left: 100%;">
+											<h4 id="True/False.6.content" style="padding: 25px 25px 0px 25px;">6.</h4>
+											<div class="row" style="padding: 100px 0px 0px 275px;">
+												<ul class="actions">
+													<li><a href="javascript:set('True/False.', 6, true);" class="button primary fit">True</a></li>
+													<li><a href="javascript:set('True/False.', 6, false);" class="button fit">False</a></li>
+												</ul>
+											</div>
+										</div>
+										<div id="True/False.7" class="box" style="position: absolute; width: 750px; height: 350px; top: 415px; left: 100%;">
+											<h4 id="True/False.7.content" style="padding: 25px 25px 0px 25px;">7.</h4>
+											<div class="row" style="padding: 100px 0px 0px 275px;">
+												<ul class="actions">
+													<li><a href="javascript:set('True/False.', 7, true);" class="button primary fit">True</a></li>
+													<li><a href="javascript:set('True/False.', 7, false);" class="button fit">False</a></li>
+												</ul>
+											</div>
+										</div>
+										<div id="True/False.8" class="box" style="position: absolute; width: 750px; height: 350px; top: 415px; left: 100%;">
+											<h4 id="True/False.8.content" style="padding: 25px 25px 0px 25px;">8.</h4>
+											<div class="row" style="padding: 100px 0px 0px 275px;">
+												<ul class="actions">
+													<li><a href="javascript:set('True/False.', 8, true);" class="button primary fit">True</a></li>
+													<li><a href="javascript:set('True/False.', 8, false);" class="button fit">False</a></li>
+												</ul>
+											</div>
+										</div>
+										<div id="True/False.9" class="box" style="position: absolute; width: 750px; height: 350px; top: 415px; left: 100%;">
+											<h4 id="True/False.9.content" style="padding: 25px 25px 0px 25px;">9.</h4>
+											<div class="row" style="padding: 100px 0px 0px 275px;">
+												<ul class="actions">
+													<li><a href="javascript:set('True/False.', 9, true);" class="button primary fit">True</a></li>
+													<li><a href="javascript:set('True/False.', 9, false);" class="button fit">False</a></li>
+												</ul>
+											</div>
+										</div>
+										<div id="True/False.10" class="box" style="position: absolute; width: 750px; height: 350px; top: 415px; left: 100%;">
+											<h4 id="True/False.10.content" style="padding: 25px 25px 0px 25px;">10.</h4>
+											<div class="row" style="padding: 100px 0px 0px 275px;">
+												<ul class="actions">
+													<li><a href="javascript:set('True/False.', 10, true);" class="button primary fit">True</a></li>
+													<li><a href="javascript:set('True/False.', 10, false);" class="button fit">False</a></li>
+												</ul>
+											</div>
+										</div>
+										<ul class="pagination" style="position: absolute; top: 850px; left: 50%; transform: translateX(-50%);">
+											<li><a id="manager.True/False.1" href="javascript:jump_to('True/False.', 1);" class="page active">1</a></li>
+											<li><a id="manager.True/False.2" href="javascript:jump_to('True/False.', 2);" class="page">2</a></li>
+											<li><a id="manager.True/False.3" href="javascript:jump_to('True/False.', 3);" class="page">3</a></li>
+											<li><a id="manager.True/False.4" href="javascript:jump_to('True/False.', 4);" class="page">4</a></li>
+											<li><a id="manager.True/False.5" href="javascript:jump_to('True/False.', 5);" class="page">5</a></li>
+											<li><a id="manager.True/False.6" href="javascript:jump_to('True/False.', 6);" class="page">6</a></li>
+											<li><a id="manager.True/False.7" href="javascript:jump_to('True/False.', 7);" class="page">7</a></li>
+											<li><a id="manager.True/False.8" href="javascript:jump_to('True/False.', 8);" class="page">8</a></li>
+											<li><a id="manager.True/False.9" href="javascript:jump_to('True/False.', 9);" class="page">9</a></li>
+											<li><a id="manager.True/False.10" href="javascript:jump_to('True/False.', 10);" class="page">10</a></li>
+										</ul>
+									</div>
+									<div id="Multiple Choice" class="row box" style="height: 650px;"> <!-- Multiple Choise -->
+									<h2 style="padding: 0% 25% 0% 40%;">Multiple Choice</h2>
+										<div id="Multiple Choice.11" class="box" style="position: absolute; width: 750px; height: 350px; top: 1110px; left: 50%; transform: translateX(-50%);">
+											<h4 id="Multiple Choice.11.content" style="padding: 25px 25px 0px 0px;">11.</h4>
+											<div class="row">
+												<div>
+													<input type="radio" id="MC.11.A" name="MC.11">
+													<label for="MC.11.A">A</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.11.B" name="MC.11">
+													<label for="MC.11.B">B</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.11.C" name="MC.11">
+													<label for="MC.11.C">C</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.11.D" name="MC.11">
+													<label for="MC.11.D">D</label>
+												</div>
+											</div>
+											<ul class="actions fit">
+												<li><a id="MC.11.SET" href="javascript:set('Multiple Choice.', 11, selectedRadio);" class="button primary fit icon solid fa-check disabled"></a></li>
+											</ul>
+										</div>
+										<div id="Multiple Choice.12" class="box" style="position: absolute; width: 750px; height: 350px; top: 1110px; left: 100%;">
+											<h4 id="Multiple Choice.12.content" style="padding: 25px 25px 0px 0px;">12.</h4>
+											<div class="row">
+												<div>
+													<input type="radio" id="MC.12.A" name="MC.12">
+													<label for="MC.12.A">A</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.12.B" name="MC.12">
+													<label for="MC.12.B">B</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.12.C" name="MC.12">
+													<label for="MC.12.C">C</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.12.D" name="MC.12">
+													<label for="MC.12.D">D</label>
+												</div>
+											</div>
+											<ul class="actions fit">
+												<li><a id="MC.12.SET" href="javascript:set('Multiple Choice.', 12, selectedRadio);" class="button primary fit icon solid fa-check disabled"></a></li>
+											</ul>
+										</div>
+										<div id="Multiple Choice.13" class="box" style="position: absolute; width: 750px; height: 350px; top: 1110px; left: 100%;">
+											<h4 id="Multiple Choice.13.content" style="padding: 25px 25px 0px 0px;">13.</h4>
+											<div class="row">
+												<div>
+													<input type="radio" id="MC.13.A" name="MC.13">
+													<label for="MC.13.A">A</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.13.B" name="MC.13">
+													<label for="MC.13.B">B</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.13.C" name="MC.13">
+													<label for="MC.13.C">C</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.13.D" name="MC.13">
+													<label for="MC.13.D">D</label>
+												</div>
+											</div>
+											<ul class="actions fit">
+												<li><a id="MC.13.SET" href="javascript:set('Multiple Choice.', 13, selectedRadio);" class="button primary fit icon solid fa-check disabled"></a></li>
+											</ul>
+										</div>
+										<div id="Multiple Choice.14" class="box" style="position: absolute; width: 750px; height: 350px; top: 1110px; left: 100%;">
+											<h4 id="Multiple Choice.14.content" style="padding: 25px 25px 0px 0px;">14.</h4>
+											<div class="row">
+												<div>
+													<input type="radio" id="MC.14.A" name="MC.14">
+													<label for="MC.14.A">A</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.14.B" name="MC.14">
+													<label for="MC.14.B">B</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.14.C" name="MC.14">
+													<label for="MC.14.C">C</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.14.D" name="MC.14">
+													<label for="MC.14.D">D</label>
+												</div>
+											</div>
+											<ul class="actions fit">
+												<li><a id="MC.14.SET" href="javascript:set('Multiple Choice.', 14, selectedRadio);" class="button primary fit icon solid fa-check disabled"></a></li>
+											</ul>
+										</div>
+										<div id="Multiple Choice.15" class="box" style="position: absolute; width: 750px; height: 350px; top: 1110px; left: 100%;">
+											<h4 id="Multiple Choice.15.content" style="padding: 25px 25px 0px 0px;">15.</h4>
+											<div class="row">
+												<div>
+													<input type="radio" id="MC.15.A" name="MC.15">
+													<label for="MC.15.A">A</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.15.B" name="MC.15">
+													<label for="MC.15.B">B</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.15.C" name="MC.15">
+													<label for="MC.15.C">C</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.15.D" name="MC.15">
+													<label for="MC.15.D">D</label>
+												</div>
+											</div>
+											<ul class="actions fit">
+												<li><a id="MC.15.SET" href="javascript:set('Multiple Choice.', 15, selectedRadio);" class="button primary fit icon solid fa-check disabled"></a></li>
+											</ul>
+										</div>
+										<div id="Multiple Choice.16" class="box" style="position: absolute; width: 750px; height: 350px; top: 1110px; left: 100%;">
+											<h4 id="Multiple Choice.16.content" style="padding: 25px 25px 0px 0px;">16.</h4>
+											<div class="row">
+												<div>
+													<input type="radio" id="MC.16.A" name="MC.16">
+													<label for="MC.16.A">A</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.16.B" name="MC.16">
+													<label for="MC.16.B">B</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.16.C" name="MC.16">
+													<label for="MC.16.C">C</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.16.D" name="MC.16">
+													<label for="MC.16.D">D</label>
+												</div>
+											</div>
+											<ul class="actions fit">
+												<li><a id="MC.16.SET" href="javascript:set('Multiple Choice.', 16, selectedRadio);" class="button primary fit icon solid fa-check disabled"></a></li>
+											</ul>
+										</div>
+										<div id="Multiple Choice.17" class="box" style="position: absolute; width: 750px; height: 350px; top: 1110px; left: 100%;">
+											<h4 id="Multiple Choice.17.content" style="padding: 25px 25px 0px 0px;">17.</h4>
+											<div class="row">
+												<div>
+													<input type="radio" id="MC.17.A" name="MC.17">
+													<label for="MC.17.A">A</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.17.B" name="MC.17">
+													<label for="MC.17.B">B</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.17.C" name="MC.17">
+													<label for="MC.17.C">C</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.17.D" name="MC.17">
+													<label for="MC.17.D">D</label>
+												</div>
+											</div>
+											<ul class="actions fit">
+												<li><a id="MC.17.SET" href="javascript:set('Multiple Choice.', 17, selectedRadio);" class="button primary fit icon solid fa-check disabled"></a></li>
+											</ul>
+										</div>
+										<div id="Multiple Choice.18" class="box" style="position: absolute; width: 750px; height: 350px; top: 1110px; left: 100%;">
+											<h4 id="Multiple Choice.18.content" style="padding: 25px 25px 0px 0px;">18.</h4>
+											<div class="row">
+												<div>
+													<input type="radio" id="MC.18.A" name="MC.18">
+													<label for="MC.18.A">A</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.18.B" name="MC.18">
+													<label for="MC.18.B">B</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.18.C" name="MC.18">
+													<label for="MC.18.C">C</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.18.D" name="MC.18">
+													<label for="MC.18.D">D</label>
+												</div>
+											</div>
+											<ul class="actions fit">
+												<li><a id="MC.18.SET" href="javascript:set('Multiple Choice.', 18, selectedRadio);" class="button primary fit icon solid fa-check disabled"></a></li>
+											</ul>
+										</div>
+										<div id="Multiple Choice.19" class="box" style="position: absolute; width: 750px; height: 350px; top: 1110px; left: 100%;">
+											<h4 id="Multiple Choice.19.content" style="padding: 25px 25px 0px 0px;">19.</h4>
+											<div class="row">
+												<div>
+													<input type="radio" id="MC.19.A" name="MC.19">
+													<label for="MC.19.A">A</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.19.B" name="MC.19">
+													<label for="MC.19.B">B</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.19.C" name="MC.19">
+													<label for="MC.19.C">C</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.19.D" name="MC.19">
+													<label for="MC.19.D">D</label>
+												</div>
+											</div>
+											<ul class="actions fit">
+												<li><a id="MC.19.SET" href="javascript:set('Multiple Choice.', 19, selectedRadio);" class="button primary fit icon solid fa-check disabled"></a></li>
+											</ul>
+										</div>
+										<div id="Multiple Choice.20" class="box" style="position: absolute; width: 750px; height: 350px; top: 1110px; left: 100%;">
+											<h4 id="Multiple Choice.20.content" style="padding: 25px 25px 0px 0px;">20.</h4>
+											<div class="row">
+												<div>
+													<input type="radio" id="MC.20.A" name="MC.20">
+													<label for="MC.20.A">A</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.20.B" name="MC.20">
+													<label for="MC.20.B">B</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.20.C" name="MC.20">
+													<label for="MC.20.C">C</label>
+												</div>
+												<div>
+													<input type="radio" id="MC.20.D" name="MC.20">
+													<label for="MC.20.D">D</label>
+												</div>
+											</div>
+											<ul class="actions fit">
+												<li><a id="MC.20.SET" href="javascript:set('Multiple Choice.', 20, selectedRadio);" class="button primary fit icon solid fa-check disabled"></a></li>
+											</ul>
+										</div>
+										<ul class="pagination" style="position: absolute; top: 1550px; left: 50%; transform: translateX(-50%);">
+											<li><a id="manager.Multiple Choice.11" href="javascript:jump_to('Multiple Choice.', 11);" class="page active">11</a></li>
+											<li><a id="manager.Multiple Choice.12" href="javascript:jump_to('Multiple Choice.', 12);" class="page">12</a></li>
+											<li><a id="manager.Multiple Choice.13" href="javascript:jump_to('Multiple Choice.', 13);" class="page">13</a></li>
+											<li><a id="manager.Multiple Choice.14" href="javascript:jump_to('Multiple Choice.', 14);" class="page">14</a></li>
+											<li><a id="manager.Multiple Choice.15" href="javascript:jump_to('Multiple Choice.', 15);" class="page">15</a></li>
+											<li><a id="manager.Multiple Choice.16" href="javascript:jump_to('Multiple Choice.', 16);" class="page">16</a></li>
+											<li><a id="manager.Multiple Choice.17" href="javascript:jump_to('Multiple Choice.', 17);" class="page">17</a></li>
+											<li><a id="manager.Multiple Choice.18" href="javascript:jump_to('Multiple Choice.', 18);" class="page">18</a></li>
+											<li><a id="manager.Multiple Choice.19" href="javascript:jump_to('Multiple Choice.', 19);" class="page">19</a></li>
+											<li><a id="manager.Multiple Choice.20" href="javascript:jump_to('Multiple Choice.', 20);" class="page">20</a></li>
+										</ul>
+									</div>
+									<div id="SubmitAnswers">
+										<ul class="actions fit">
+											<li><a id="SubmitAnswers.content" href="javascript:calculate_score();" class="button primary fit icon solid fa-check disabled">Submit</a></li>
+										</ul>
+									</div>
+								</div>
+							</section>
+
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
